@@ -16,7 +16,7 @@ namespace projectManagementSystem.Main
             var cancellationToken = cancellationTokenSource.Token;
             string connectionString = ConnectionString.BaseConnectionStringPg;
             IUserRepositories userRepo = new UserRepositories(connectionString);
-            await UtilsPasswordMigrationHelper.HashAndUpdatePasswordForUser(userRepo, "pavel1", "qwe", cancellationToken); //использовал дл€ обхода проблемы с паролем самого первого пользовател€
+            await UtilsPasswordMigrationHelper.HashAndUpdatePasswordForUser(userRepo, "admin1", "qwe", cancellationToken); //использовал дл€ обхода проблемы с паролем самого первого пользовател€
             while (true)
             {
                 Console.WriteLine("ƒобро пожаловать!");
@@ -33,7 +33,7 @@ namespace projectManagementSystem.Main
                     int currentUserId = user.Id;
                     Console.WriteLine($"”спешный вход как {user.Role}.");
 
-                    if (user.Role.ToLower() == "menedger")
+                    if (user.Role.ToLower() == "manager")
                     {
                         await RunManagerInterface(userRepo, new ProjectTaskRepositories(connectionString), new LogRepositories(connectionString), currentUserId, cancellationToken);
                     }
